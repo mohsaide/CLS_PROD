@@ -457,3 +457,38 @@ fetch(url);
 });
 
 
+  // team members loader 
+
+  fetch('http://localhost/assets/php/team.php')
+  .then(response => response.json())
+  .then(data => {
+    let jsonData = data; // store the parsed JSON data in a variable
+    members = jsonData.data
+    let myDiv = document.getElementById('team_members');
+
+    for(let i = 0 ; i<members.length ; i++)
+    {
+
+        var componet =
+         `
+         <div class="col-xl-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
+         <div class="member">
+           <img src="assets/img/team/${members[i].IMAGE}" class="img-fluid" alt="">
+           <h4>${members[i].NAME}</h4>
+           <span>${members[i].ROLE}</span>
+           <div class="social">
+             <a href="${members[i].TWITER}" ><i class="bi bi-twitter"></i></a>
+             <a href="${members[i].FACEBOOK}" ><i class="bi bi-facebook"></i></a>
+             <a href="${members[i].INSTGRAM}" ><i class="bi bi-instagram"></i></a>
+             <a href="${members[i].LINKEDIN}" ><i class="bi bi-linkedin"></i></a>
+           </div>
+         </div>
+       </div>
+         ` ;
+
+
+        myDiv.innerHTML += componet ;  
+    }
+
+  })
+  .catch(error => console.error(error));

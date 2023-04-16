@@ -35,8 +35,40 @@ error_reporting(E_ALL & ~E_WARNING);
      
         try
         {
-            echo 'get'; 
-           // get logic 
+            // Query which return random 5 rates & feedbacks 
+            $sql = "select full_name NAME , image IMAGE , role ROLE , linkedin_link LINKEDIN , instagram_link INSTGRAM , facebook_link FACEBOOK , twitter_link TWITER  from team ;";
+            $result = mysqli_query($conn, $sql);
+
+
+            // Check if a records were found
+            if ($result->num_rows > 0)
+            {
+                // Fetch the results into an array
+                $rates = array();
+                while ($row = mysqli_fetch_assoc($result)) 
+                {
+                    $rates[] = $row;
+                }
+
+
+                // Send a response back to the client
+                header('HTTP/1.1 200 SUCCESS');
+                $response['status'] = '200_SUCCESS';
+                $response['data'] = $rates ;
+                echo json_encode($response) ; 
+                exit();  
+
+            }
+            else {
+
+                // If no records were found, send an error response
+                header('HTTP/1.1 200 No Content');
+                $response['status'] = '200_NO_CONTENT';
+                $response['data'] = array() ;
+                echo json_encode($response); 
+                exit(); 
+            }
+
         }
          catch (\Throwable $get_logic)
         {
