@@ -4,12 +4,12 @@
 
    if ($_SERVER['REQUEST_METHOD'] === 'POST')
    {
-       if ( $_GET['secret_code'] == 'SECRET_TOKEN')
+       if ( $_POST['secret_code'] == 'SECRET_TOKEN')
        {
              $headers = "From: support@clsonline.org\r\n" .
                          "Reply-To: support@clsonline.org\r\n" .
                          "X-Mailer: PHP/" . phpversion();
-             mail( $_GET['to'] , $_GET['subject']  , $_GET['message'] , $headers) ;
+             mail( $_POST['to'] , $_POST['subject']  , $_POST['message'] , $headers) ;
              
              header('HTTP/1.1 200 SUCCESS');
              $response['status'] = '200_SUCCESS';
