@@ -19,16 +19,27 @@ function submitForm(event) {
         {
             mailing_notification.innerHTML = 'Email has been sent!';
             mailing_notification.style.backgroundColor = 'green';
+            document.getElementById("to").value ='';
+            document.getElementById("subject").value ='';
+            document.getElementById("message").value ='';
+
         }
         else if (response['status']==401)
         {
             mailing_notification.innerHTML = 'You are not authorized!';
             mailing_notification.style.backgroundColor = 'Orange';
+            document.getElementById("to").value ='';
+            document.getElementById("subject").value ='';
+            document.getElementById("message").value ='';
+
         }
         else
         {
             mailing_notification.innerHTML = 'Something went wrong!';
             mailing_notification.style.backgroundColor = 'red';
+            document.getElementById("to").value ='';
+            document.getElementById("subject").value ='';
+            document.getElementById("message").value ='';
 
         }
        
@@ -38,6 +49,9 @@ function submitForm(event) {
         mailing_notification.innerHTML = 'Something went wrong!';
         mailing_notification.style.backgroundColor = 'red';
         console.error('mailing js error');
+        document.getElementById("to").value ='';
+        document.getElementById("subject").value ='';
+        document.getElementById("message").value ='';
         
       });
 
