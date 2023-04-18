@@ -309,33 +309,28 @@ fetch('http://clsonline.org/assets/php/testimonials.php')
     for(let i = 0 ; i<users.length ; i++)
     {
 
-        var componet = '<div class="swiper-slide">\
-        <div class="testimonial-wrap">\
-        <div class="testimonial-item">\
-            <div class="d-flex align-items-center">\
-            <img src="assets/img/user/USER_IMG" class="testimonial-img flex-shrink-0" >\
-            <div>\
-                <h3>NAME</h3>\
-                <h4>POSITION</h4>\
-                <div class="stars">\
-                RATE\
-                </div>\
-            </div>\
-            </div>\
-            <p>\
-            <i class="bi bi-quote quote-icon-left"></i>\
-            FEEDBACK\
-            <i class="bi bi-quote quote-icon-right"></i>\
-            </p>\
-        </div>\
-        </div>\
-    </div><!-- End testimonial item -->' ;
-
-    componet =componet.replace('USER_IMG' , users[i].IMAGE);
-    componet =componet.replace('NAME' , users[i].NAME);
-    componet =componet.replace('POSITION' , users[i].ROLE);
-    componet =componet.replace('RATE' , '<span style="color: gold; font-size: larger;">✮</span>'.repeat(users[i].RATE));
-    componet =componet.replace('FEEDBACK' , users[i].FEEDBACK);
+        var componet =
+         `<div class="swiper-slide">
+        <div class="testimonial-wrap">
+        <div class="testimonial-item">
+            <div class="d-flex align-items-center">
+            <img src="assets/img/user/${users[i].IMAGE}" class="testimonial-img flex-shrink-0" >
+            <div>
+                <h3>${users[i].NAME}</h3>
+                <h4>${users[i].ROLE}</h4>
+                <div class="stars">
+                ${'<span style="color: gold; font-size: larger;">✮</span>'.repeat(users[i].RATE)}
+                </div>
+            </div>
+            </div>
+            <p>
+            <i class="bi bi-quote quote-icon-left"></i>
+            ${users[i].FEEDBACK}
+            <i class="bi bi-quote quote-icon-right"></i>
+            </p>
+        </div>
+        </div>
+    </div><!-- End testimonial item -->` ;
 
     myDiv.innerHTML += componet ;     
     }
@@ -356,14 +351,12 @@ fetch('http://clsonline.org/assets/php/stats.php')
     for(let i = 0 ; i<users.length ; i++)
     {
 
-        var componet = '<div class="stats-item d-flex align-items-center">\
-        <h1 class="bold mx-3" style="color:#008374; font-family: \'Changa\', sans-serif;">COUNT</h1>\
-        <p><strong class="h2">ITEM</strong> DESCR.</p>\
-         </div>';
+        var componet =
+        `<div class="stats-item d-flex align-items-center">
+        <h1 class="bold mx-3" style="color:#008374; font-family: 'Changa', sans-serif;">${users[i].COUNT}</h1>\
+        <p><strong class="h2">${users[i].ITEM}</strong> ${users[i].DESCR}.</p>
+         </div>`;
 
-    componet =componet.replace('COUNT' , users[i].COUNT);
-    componet =componet.replace('ITEM' , users[i].ITEM);
-    componet =componet.replace('DESCR' , users[i].DESCR);
     myDiv.innerHTML += componet ;  
 
     }
@@ -384,48 +377,43 @@ fetch('http://clsonline.org/assets/php/stats.php')
     let myDiv = document.getElementById('faqlist');
 
     var sign_faq =
-     '<div class="accordion-item">\
-    <h3 class="accordion-header">\
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sign-faq-item">\
-        <span class="num">◆</span>\
-        Please sign in to see more.\
-      </button>\
-    </h3>\
-    <div id="sign-faq-item" class="accordion-collapse collapse" data-bs-parent="#faqlist">\
-      <div class="accordion-body">\
-        <a href="/assets/html/signin.html" class="link" style="color: black; " id="#faq_link">Click here</a>\
-      </div>\
-    </div>\
-    </div>';
+    `<div class="accordion-item">
+    <h3 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sign-faq-item">
+        <span class="num">◆</span>
+        Please sign in to see more.
+      </button>
+    </h3>
+    <div id="sign-faq-item" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+      <div class="accordion-body">
+        <a href="/assets/html/signin.html" class="link" style="color: black; " id="#faq_link">Click here</a>
+      </div>
+    </div>
+    </div>`;
 
 
     for(let i = 0 ; i<users.length ; i++)
     {
 
         var componet =
-         '<div class="accordion-item">\
+         `<div class="accordion-item">\
         <h3 class="accordion-header">\
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ID_NAME">\
-            <span class="num">NUMBER.</span>\
-            QUESTION\
-          </button>\
-        </h3>\
-        <div id="ID_NAME" class="accordion-collapse collapse" data-bs-parent="#faqlist">\
-          <div class="accordion-body">\
-            ANSWER\
-          </div>\
-        </div>\
-        </div>' ;
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${'FAQ_ITEM_'.concat(i+1)}">\
+            <span class="num">${i+1}.</span>
+            ${users[i].QUESTION}
+          </button>
+        </h3>
+        <div id="${'FAQ_ITEM_'.concat(i+1)}" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+          <div class="accordion-body">
+          ${users[i].ANSWER}
+          </div>
+        </div>
+        </div>` ;
 
-    componet =componet.replace('NUMBER' , i+1 );
-    componet =componet.replace('NUMBER' , users[i].NUMBER);
-    componet =componet.replace('QUESTION' , users[i].QUESTION);
-    componet =componet.replace('ANSWER' , users[i].ANSWER);
-    componet =componet.replace('ID_NAME' , 'FAQ_ITEM_'.concat(i+1) );
-    componet =componet.replace('ID_NAME' , 'FAQ_ITEM_'.concat(i+1) );
-
+    // TO SHOW JUST 4 ELEMENTS
     myDiv.innerHTML += componet ;  
-    if(i==4)break ;    
+    if(i==4)break ;   
+
     }
 
     myDiv.innerHTML += sign_faq ; 
