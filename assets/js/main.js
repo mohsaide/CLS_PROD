@@ -435,28 +435,6 @@ fetch('http://localhost/assets/php/stats.php')
   .catch(error => console.error(error));
 
 
-// concat from listner 
-
-const form = document.getElementById('land_contact');
-
-form.addEventListener('submit', function(event) {
-  event.preventDefault(); 
-  var sender = document.getElementById("form_sender").value; // get the input element
-  var message = document.getElementById("form_message").value; // get the input element
-  var subject = document.getElementById("form_subject").value; // get the input element
-  var cus_subject = subject + ' - ( ' + sender + ' ) ';
-
-var url = 'http://clsonline.org/assets/php_apis/f.php?to=ACP&subject=SUB&message=MSG' ;
-url = url.replace('ACP' , 'mohammad2001saide@gmail.com');
-url = url.replace('SUB' , cus_subject );
-url = url.replace('MSG' , message );
-fetch(url);
-
-  
-  
-});
-
-
   // team members loader 
 
   fetch('http://localhost/assets/php/team.php')

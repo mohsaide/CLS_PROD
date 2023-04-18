@@ -491,24 +491,25 @@
 
           <div class="col-lg-8">
 
-            <form  id="land_contact"  class="php-email-form">
-
+            <form  id="mailing_form"  class="php-email-form">
+               
+              <input type="hidden" style="display: none;" name="secret_code" value="SECRET_TOKEN">
               
               <div class="form-group mt-3">
-                <input type="email" class="form-control" name="sender" id="form_sender" placeholder="Your Email" required>
+                <input type="email" class="form-control" name="to" id="to" placeholder="Your Email" required>
               </div>
 
               <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="form_subject" placeholder="Subject" required>
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
               </div>
 
               <div class="form-group mt-3">
-                <textarea class="form-control" name="message" id="form_message" rows="7" placeholder="Message" required></textarea>
+                <textarea class="form-control" name="message" id="message" rows="7" placeholder="Message" required></textarea>
               </div>
               <div >
-                <div class="sent-message mb-1" id="sent_message">Your message has been sent. Thank you!</div>
+                <div class="sent-message mb-1" id="mailing_notification">.</div>
               </div>
-              <div class="text-center" > <button type="submit">Send Message</button></div>
+              <div class="text-center" onclick="submitForm(event)" > <button type="submit">Send Message</button></div>
             </form>
 
 
@@ -584,6 +585,8 @@
 
   <!-- custom JS Files -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/mailing.js"></script>
+  
 
 
 
