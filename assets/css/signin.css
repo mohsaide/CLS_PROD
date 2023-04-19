@@ -1,0 +1,21 @@
+.form-link:hover
+{
+color: #008374 !important;
+}
+
+.custom-submit-button:hover
+{
+    background-color: #6ca7a3 !important;
+}
+
+label
+{
+    color: brown !important;
+}
+
+label::after
+{
+    content: ' *';
+    color: #008374;
+}
+

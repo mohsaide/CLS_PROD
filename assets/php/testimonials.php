@@ -48,7 +48,6 @@ error_reporting(E_ALL & ~E_WARNING);
             FROM user_testimonials
             left join user on user_testimonials.user_id =user.id 
             left join university_member on university_member.user_id = user.id and university_member.status ='ACTIVE' 
-            left join university_member_auth_pool on member_id = university_member.id 
             left join university on university_member.university_id = university.id ORDER BY RAND() ;";
             $result = mysqli_query($conn, $sql);
 

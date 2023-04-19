@@ -300,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 let jsonData;
 
-fetch('http://clsonline.org/assets/php/testimonials.php')
+fetch('http://localhost/assets/php/testimonials.php')
   .then(response => response.json())
   .then(data => {
     jsonData = data; // store the parsed JSON data in a variable
@@ -342,7 +342,7 @@ fetch('http://clsonline.org/assets/php/testimonials.php')
 
 // stats loader
 
-fetch('http://clsonline.org/assets/php/stats.php')
+fetch('http://localhost/assets/php/stats.php')
   .then(response => response.json())
   .then(data => {
     jsonData = data; // store the parsed JSON data in a variable
@@ -369,7 +369,7 @@ fetch('http://clsonline.org/assets/php/stats.php')
 
   // faq loader 
 
-  fetch('http://clsonline.org/assets/php/faq.php')
+  fetch('http://localhost/assets/php/faq.php')
   .then(response => response.json())
   .then(data => {
     let jsonData = data; // store the parsed JSON data in a variable
@@ -425,7 +425,7 @@ fetch('http://clsonline.org/assets/php/stats.php')
 
   // team members loader 
 
-  fetch('http://clsonline.org/assets/php/team.php')
+  fetch('http://localhost/assets/php/team.php')
   .then(response => response.json())
   .then(data => {
     let jsonData = data; // store the parsed JSON data in a variable
