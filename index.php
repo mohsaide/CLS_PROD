@@ -1,3 +1,10 @@
+<?php 
+session_start(); 
+if (!empty($_SESSION)) {
+  session_destroy();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +32,7 @@
   <link href="assets/vendor/aos/aos.css" rel="stylesheet"> <!-- Animate on scroll library -->
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet"> <!-- to animate images and videos -->
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">  <!-- to handle slider movement -->
-  <link href="assets/css/main.css" rel="stylesheet"> <!-- custom css file -->
+  <link href="assets/css/land_main.css" rel="stylesheet"> <!-- custom css file -->
 
 
 </head>
@@ -76,7 +83,7 @@
           <p>Compatible Learning System - first shared learning community.</p>
 
           <div class="d-flex justify-content-center justify-content-lg-start">
-            <a href="assets/html/signin.php" class="btn-get-started mx-2">Sign in</a> 
+            <a href="assets/html/h_login.php" class="btn-get-started mx-2">Sign in</a> 
           </div>
 
 
@@ -523,16 +530,16 @@
   </main>
 
   <?php
-include('assets/html/footer.html');
+include('assets/html/h_footer.php');
    ?>
 
- 
+  
+<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<div id="preloader"></div>
 
-  <div id="preloader"></div>
 
-  <!-- Vendor JS Files -->
+<!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>

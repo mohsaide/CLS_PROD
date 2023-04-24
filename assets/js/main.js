@@ -296,13 +296,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
 // testimonials loader 
-
-let jsonData;
-
-fetch('http://localhost/assets/php/testimonials.php')
+fetch('http://localhost/assets/php/p_testimonials.php')
   .then(response => response.json())
   .then(data => {
+    let jsonData;
     jsonData = data; // store the parsed JSON data in a variable
     users = jsonData.data
     let myDiv = document.getElementById('rates_id');
@@ -337,12 +336,11 @@ fetch('http://localhost/assets/php/testimonials.php')
 
 
   })
-  .catch(error => console.error(error));
+  .catch(error => console.error('ERROR HAPPEND WHILE loading testimials  ( ' + error + ') '));
 
 
 // stats loader
-
-fetch('http://localhost/assets/php/stats.php')
+fetch('http://localhost/assets/php/p_stats.php')
   .then(response => response.json())
   .then(data => {
     jsonData = data; // store the parsed JSON data in a variable
@@ -359,17 +357,13 @@ fetch('http://localhost/assets/php/stats.php')
 
     myDiv.innerHTML += componet ;  
 
-    }
-
-
-  })
-  .catch(error => console.error(error));
+    }})
+  .catch(error => console.error('ERROR HAPPEND WHILE loading stats  ( ' + error + ') '));
 
 
 
   // faq loader 
-
-  fetch('http://localhost/assets/php/faq.php')
+  fetch('http://localhost/assets/php/p_faq.php')
   .then(response => response.json())
   .then(data => {
     let jsonData = data; // store the parsed JSON data in a variable
@@ -418,14 +412,12 @@ fetch('http://localhost/assets/php/stats.php')
 
     myDiv.innerHTML += sign_faq ; 
 
-
   })
-  .catch(error => console.error(error));
+  .catch(error => console.error('ERROR HAPPEND WHILE loading testimials ( ' + error + ') '));
 
 
   // team members loader 
-
-  fetch('http://localhost/assets/php/team.php')
+  fetch('http://localhost/assets/php/p_team.php')
   .then(response => response.json())
   .then(data => {
     let jsonData = data; // store the parsed JSON data in a variable
@@ -443,10 +435,10 @@ fetch('http://localhost/assets/php/stats.php')
            <h4>${members[i].NAME}</h4>
            <span>${members[i].ROLE}</span>
            <div class="social">
-             <a href="${members[i].TWITER}" ><i class="bi bi-twitter"></i></a>
-             <a href="${members[i].FACEBOOK}" ><i class="bi bi-facebook"></i></a>
-             <a href="${members[i].INSTGRAM}" ><i class="bi bi-instagram"></i></a>
-             <a href="${members[i].LINKEDIN}" ><i class="bi bi-linkedin"></i></a>
+             <a href="${members[i].TWITER}" target='_blank'><i class="bi bi-twitter"></i></a>
+             <a href="${members[i].FACEBOOK}" target='_blank'><i class="bi bi-facebook"></i></a>
+             <a href="${members[i].INSTGRAM}" target='_blank'><i class="bi bi-instagram"></i></a>
+             <a href="${members[i].LINKEDIN}" target='_blank'><i class="bi bi-linkedin"></i></a>
            </div>
          </div>
        </div>
@@ -457,4 +449,4 @@ fetch('http://localhost/assets/php/stats.php')
     }
 
   })
-  .catch(error => console.error(error));
+  .catch(error => console.error('ERROR HAPPEND WHILE loading team ( ' + error + ') '));
