@@ -10,13 +10,13 @@ if(isset($_SESSION['AuthToken']) && isset($_SESSION['UserId']))
     $rs = mysqli_query($conn, $set_auth);
     if (mysqli_num_rows($rs) == 0)
     {
-        header("Location:/assets/html/h_login.php");
+        header("Location:/assets/html/h_unauthorized.php");
     }
     
 }
 else
 {
-    header("Location:/assets/html/h_login.php");
+    header("Location:/assets/html/h_unauthorized.php");
 
 }
 
@@ -45,6 +45,13 @@ else
 
      <!-- Vendor css -->
      <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+     <style>
+  body {
+    min-width: 576px; /* 4 grid columns at small screen size (576px) */
+  }
+</style>
+
 
 </head>
 

@@ -23,7 +23,7 @@ include 'page_start.php' ;
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-12 col-xl-6 mb-4 zoom" >
-                            <a href="profile.html" class="custom_link">
+                            <a href="profile.php" class="custom_link">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">

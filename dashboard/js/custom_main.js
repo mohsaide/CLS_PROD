@@ -137,9 +137,8 @@ function send(event)
       var myForm = document.getElementById("support_form");
       var formData = new FormData(myForm); 
   
-  
       
-        fetch("http://clsonline.org/assets/php/mailing.php", {
+        fetch("http://localhost/assets/php/mailing.php", {
           method: "POST",
           body: formData
         })
@@ -149,7 +148,6 @@ function send(event)
           if (response['status']==200)
           {
              
-            alert (document.getElementById('support_subject').value);
             var message = document.getElementById('support_fail_message');
             message.style.display ='none' ;
             var message = document.getElementById('support_success_message');
@@ -165,15 +163,20 @@ function send(event)
             document.getElementById('support_fail_message').innerHTML = '<strong>Success!</strong> Please contact support team!';
             var message = document.getElementById('support_fail_message');
             message.style.display ='block' ;
-            return;
-                  
+            return;    
   
           }
          
         })
         .catch(error => {
+      
+          var message = document.getElementById('support_success_message');
+            message.style.display ='none' ;
+            document.getElementById('support_fail_message').innerHTML = '<strong>Success!</strong> Please contact support team!';
+            var message = document.getElementById('support_fail_message');
+            message.style.display ='block' ;
+            return;
 
-          
         });
 
 
@@ -200,6 +203,9 @@ function Myclear(event)
       {
        myForm.elements[i].value = ''; 
       }
+      
+
+
 
       var myForm = document.getElementById("support_form");
       for (let i = 0; i < myForm.elements.length; i++) 
