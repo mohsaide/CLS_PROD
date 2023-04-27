@@ -67,7 +67,7 @@ else
             <!-- logo  -->
 
               <nav class="navbar justify-content-center">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="../index.php">
                   <img src="../assets/img/logo.jpg" width="30" height="30" class="d-inline-block align-top" alt="cls">
                 </a>
               </nav>
@@ -78,7 +78,7 @@ else
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="main.php">
                     <i class="bi bi-speedometer2"></i>
                     <span>Dashboard</span></a>
             </li>

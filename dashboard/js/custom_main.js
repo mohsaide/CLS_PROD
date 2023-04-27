@@ -205,8 +205,6 @@ function Myclear(event)
       }
       
 
-
-
       var myForm = document.getElementById("support_form");
       for (let i = 0; i < myForm.elements.length; i++) 
       {

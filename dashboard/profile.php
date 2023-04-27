@@ -2,7 +2,39 @@
 include 'page_start.php' ;
 ?>
 
- 
+<?php 
+                                    try {
+                                    include '../assets/php/connection.php';
+                                    $query= "select
+                                    concat( first_name, ' ' ,last_name ) name ,
+                                     first_name ,
+                                     last_name ,
+                                     city_id ,
+                                     email ,
+                                     user.image image,
+                                     dob , 
+                                     phone ,
+                                     concat( country.name , ' - ' , city.name ) address,
+                                    CASE role
+                                                WHEN 'OWN' THEN CONCAT('  Owner of ' ,university.name )
+                                                WHEN 'INST' THEN CONCAT('  Instructor at ' , university.name  )
+                                                WHEN 'STD' THEN CONCAT('  Student at ' , university.name  )
+                                                ELSE '  Active member in our community'
+                                    END as ROLE  
+                                    from user
+                                    left join city on city_id = city.id
+                                    left join country on country_id = country.id
+                                    left join university_member on university_member.user_id = user.id and university_member.status ='ACTIVE' 
+                                    left join university on university_id = university.id
+                                    where user.id = '".$_SESSION['UserId']."' ;" ;
+                                    $result = mysqli_query($conn, $query);
+                                    $data = mysqli_fetch_assoc($result);
+                                    } catch (\Throwable $th) {
+
+                                       exit();
+                                    }
+                                    ?>
+
 
 <div class="container-fluid">
                  <link href="css/profile.css" rel="stylesheet"> 
@@ -10,7 +42,7 @@ include 'page_start.php' ;
                      <div class="row">
 
                          <!-- image + email  -->
-                         <form class="col-lg-6 border-right">
+                         <form class="col-lg-6 border-right" id='personal_from'>
 
                              <div class="d-flex flex-column align-items-center p-3 py-5">
 
@@ -18,15 +50,10 @@ include 'page_start.php' ;
                                  
                                     <div id='profileImg' class="rounded-circle" style='width:150px; height:150px; background-image:url("../assets/img/user/<?php 
                                     try {
-                                    include '../assets/php/connection.php';
-                                    $query= "select image from user where id = '".$_SESSION['UserId']."' ;" ;
-                                    $result = mysqli_query($conn, $query);
-                                    $data = mysqli_fetch_assoc($result);
-                                    echo $data['image']; 
-                                       
+                                    echo $data['image'];
                                     } catch (\Throwable $th) {
-                                       
-                                        echo 'default.png';
+
+                                       echo 'default.png';
                                     }
                                     ?>");   background-size: cover; background-position: center; background-repeat: no-repeat;'>
                                     
@@ -37,59 +64,78 @@ include 'page_start.php' ;
                                   </div>
 
 
-                                 <span class="font-weight-bold text-primary"> 
-
-                                    <?php 
+                                 <span class="font-weight-bold text-primary"> <?php 
                                     try {
-                                    include '../assets/php/connection.php';
-                                    $query= "select concat (first_name , ' ' , last_name) as fullname from user where id = '".$_SESSION['UserId']."' ;" ;
-                                    $result = mysqli_query($conn, $query);
-                                    $data = mysqli_fetch_assoc($result);
-                                    echo $data['fullname']; 
-                                       
+                                    echo $data['name'];
                                     } catch (\Throwable $th) {
-                                       
-                                        echo 'Unkown User';
-                                    }
-                                    ?>
 
-                                </span><span class="text-black-50">
-                                <?php 
-                                    try {
-                                    include '../assets/php/connection.php';
-                                    $query= "select email from user where id = '".$_SESSION['UserId']."' ;" ;
-                                    $result = mysqli_query($conn, $query);
-                                    $data = mysqli_fetch_assoc($result);
-                                    echo $data['email']; 
-                                       
-                                    } catch (\Throwable $th) {
-                                       
-                                        echo 'anonymise@clsonline.org';
+                                       echo 'Unknown User';
                                     }
-                                    ?>
-                                </span><span> </span>
+                                    ?> </span><span class="text-black-50"><?php 
+                                    try {
+                                    echo $data['email'];
+                                    } catch (\Throwable $th) {
+
+                                       echo 'anonymise@clsonline.org';
+                                    }
+                                    ?></span><span> </span>
 
                                  <div class="row mt-3">
-                                     <div class="col-md-6 mt-3"><label class="labels">Name</label><input type="text" class="form-control"  value="Mohammad"></div>
-                                     <div class="col-md-6 mt-3"><label class="labels">Surname</label><input type="text" class="form-control" value="Saide" ></div>
-                                     <div class="col-md-12 mt-3"><label class="labels">Mobile Number</label><input type="text" class="form-control"  value="056 880 5065"></div>
-                                     <div class="col-md-12 mt-3"><label class="labels mt-2">Date of birth</label><input type="date" class="form-control"  value="2001-05-23"></div>
+                                     <div class="col-md-6 mt-3"><label class="labels">Name</label><input required type="text" class="form-control" name='fname' value="<?php 
+                                    try {
+                                    echo $data['first_name'];
+                                    } catch (\Throwable $th) {
+
+                                       echo 'Unknown';
+                                    }
+                                    ?>"></div>
+                                     <div class="col-md-6 mt-3"><label class="labels">Surname</label><input required type="text" class="form-control" name='lname' value="<?php 
+                                    try {
+                                    echo $data['last_name'];
+                                    } catch (\Throwable $th) {
+
+                                       echo 'User';
+                                    }
+                                    ?>" ></div>
+                                     <div class="col-md-12 mt-3"><label class="labels">Mobile Number</label><input required type="text" class="form-control" name='phone'  value="<?php 
+                                    try {
+                                    echo $data['phone'];
+                                    } catch (\Throwable $th) {
+
+                                       echo '000 000 0000';
+                                    }
+                                    ?>"></div>
+                                     <div class="col-md-12 mt-3"><label class="labels mt-2">Date of birth</label><input required type="date" class="form-control" name='dob'  value="<?php 
+                                    try {
+                                    echo $data['dob'];
+                                    } catch (\Throwable $th) {
+
+                                       echo '9999-01-01';
+                                    }
+                                    ?>"></div>
                                      <div class="col-md-12 mt-3">
-                                     <label for="address">Country</label>
-                                         <select name="country" class="form-control" id="country" >
-                                             <option selected disabled hidden> <span id="cur_country">Palestine</span></option>
-                                             <option value="palestine">Palestine</option>
-                                             <option value="lebnon">Lebnon</option>
-                                             <option value="egypt">Egypt</option>
-                                             <option value="jordan">Jordan</option>
-                                             <option value="iraq">Iraq</option>
- 
+                                     <label for="address">Country - City</label>
+                                         <select required class="form-control" id="address" name='address' >
+                                             <option value ='<?php try {
+                                    echo $data['city_id'];
+                                    } catch (\Throwable $th) {
+
+                                       echo '57';
+                                    }
+                                    ?>'> <?php try {
+                                    echo $data['address'];
+                                    } catch (\Throwable $th) {
+
+                                       echo 'Undefined - Undefined';
+                                    }
+                                    ?>  </span></option>
                                          </select>
                                     </div>
                                  </div>
                                  
 
-                                 <div class="mt-4 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+                                 <div class="mt-4 text-center"><button class="btn btn-primary profile-button" type="button" onclick="save_profile(event)">
+                                 Save Profile</button></div>
                         
                              </div>
                                 
@@ -108,9 +154,15 @@ include 'page_start.php' ;
                                  </div>
                                  
                                  <ul class="list-group list-group-flush">
-                                     <li class="list-group-item"> <i class="bi bi-check-lg text-lg" style="color: coral;"></i> Study CS at NNU</li>
-                                     <li class="list-group-item"> <i class="bi bi-check-lg text-lg" style="color: coral;"></i> Finish Clean code book.</li>
-                                     <li class="list-group-item"> <i class="bi bi-check-lg text-lg" style="color: coral;"></i> Finish web 1 course.</li>
+                                     <li class="list-group-item"> <i class="bi bi-check-lg text-lg" style="color: coral;"></i><?php 
+                                    try {
+                                    echo $data['ROLE'];
+                                    } catch (\Throwable $th) {
+
+                                       echo '  Active member in our community.';
+                                    }
+                                    ?></li>
+                                     
                                    </ul> 
 
 
@@ -131,22 +183,20 @@ include 'page_start.php' ;
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Let's update it.</h5>
-                                            <button class="close" type="button" data-dismiss="modal" onclick="Myclear2(event)"  aria-label="Close">
-                                                <span aria-hidden="true" >×</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <from id='UploadImg'>
+                                            <form id='UploadImg'>
                                             <div class="form-group">
                                                 <div class="square-input">
-                                                <input type="file" class="form-control-file" id="file-input">
+                                                <input required type="file" class="form-control-file" name='image' accept="image/*" id="file-input">
                                             </div>
                                             </div>
-                                            </from>
+                                            </form>
                                         </div>
                                         <div class="modal-footer">
                                             <button class="btn btn-secondary" type="button" onclick="Myclear2(event)" data-dismiss="modal">Cancel</button>
-                                            <a class="btn btn-primary" href="../assets/html/h_login.php">Change</a>
+                                            <a class="btn btn-primary" onclick='update_image(event)'>Change</a>
                                         </div>
                                     </div>
                                 </div>

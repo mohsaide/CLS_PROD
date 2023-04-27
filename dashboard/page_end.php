@@ -30,8 +30,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal"  aria-label="Close">
-                        <span aria-hidden="true" >×</span>
                     </button>
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
@@ -49,9 +47,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal"  onclick="Myclear(event)" aria-label="Close" >
-                        <span aria-hidden="true" >×</span>
+                    <h5 class="modal-title" id="exampleModalLabel">What is the issue?</h5>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -89,8 +85,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Let's change your account's password.</h5>
-                    <button class="close" type="button" data-dismiss="modal" onclick="Myclear(event)" aria-label="Close">
-                        <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">

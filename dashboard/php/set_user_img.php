@@ -4,6 +4,8 @@
 header('Content-Type: application/json');
 error_reporting(E_ALL & ~E_WARNING);
 
+
+
  try
 {
 
@@ -15,33 +17,32 @@ error_reporting(E_ALL & ~E_WARNING);
          try
         {
            session_start();
+           $_SESSION['UserId']= '99';
            if ( !isset($_SESSION['UserId']) || !isset($_SESSION['AuthToken']) )
            {
-            echo 
             header('HTTP/1.1 200 SUCCESS');
             $response['status'] ='200_SUCCESS' ;
-            $response['data'] = array("success_flag" => 1 , "message" => 'UNAUTHORIZED' );
+            $response['data'] = array("success_flag" => 1 , "message" => 'UNAUTHORIZED1' );
             echo json_encode($response) ;  
             exit();
              
            }
            else
            {
-            
             $query = "select * from user_auth where user_id = '".$_SESSION['UserId']."' and value = '".$_SESSION['AuthToken']."'  ;" ;
             $rs = mysqli_query($conn, $query);
             if (mysqli_num_rows($rs) == 0)
             {
                 header('HTTP/1.1 200 SUCCESS');
                 $response['status'] ='200_SUCCESS' ;
-                $response['data'] = array("success_flag" => 1 , "message" => 'UNAUTHORIZED' );
+                $response['data'] = array("success_flag" => 1 , "message" => 'UNAUTHORIZED2' );
                 echo json_encode($response) ;  
                 exit();  
             }
            else
            {
 
-            if(!isset($_POST['fname']) || !isset($_POST['lname']) ||!isset($_POST['phone']) || !isset($_POST['address']) || !isset($_POST['dob']))
+            if(!isset($_FILES['image']))
             {
                 header('HTTP/1.1 400 Bad Request');
                 $response['status'] ='400_Bad_Request' ;
@@ -52,8 +53,8 @@ error_reporting(E_ALL & ~E_WARNING);
             else 
             {
 
-                $query = 'update user set first_name = "'.$_POST['fname'].'" , last_name = "'.$_POST['lname'].'", phone = "'.$_POST['phone'].'" , city_id = "'.$_POST['address'].'"  , dob= "'.$_POST['dob'].'" where id = '.$_SESSION['UserId'].' ;';
-                mysqli_query($conn , $query);
+                $file_tmp =$_FILES['image']['tmp_name'];
+                move_uploaded_file($file_tmp, "../../assets/img/user/".$_SESSION['UserId'].".png");
                 header('HTTP/1.1 200 SUCCESS');
                 $response['status'] ='200_SUCCESS' ;
                 $response['data'] = array("success_flag" => 1 , "message" => 'DONE' );
