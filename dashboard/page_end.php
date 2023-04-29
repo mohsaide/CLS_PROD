@@ -3,10 +3,10 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+            <footer class="sticky-footer" style='background-color:#19756D !important;' >
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; CLS 2023</span>
+                        <strong style='color:white !important;'>Copyright &copy; CLS 2023</strong>
                     </div>
                 </div>
             </footer>

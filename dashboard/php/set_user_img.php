@@ -3,7 +3,7 @@
 
 header('Content-Type: application/json');
 error_reporting(E_ALL & ~E_WARNING);
-
+session_start();
 
 
  try
@@ -16,13 +16,11 @@ error_reporting(E_ALL & ~E_WARNING);
 
          try
         {
-           session_start();
-           $_SESSION['UserId']= '99';
            if ( !isset($_SESSION['UserId']) || !isset($_SESSION['AuthToken']) )
            {
             header('HTTP/1.1 200 SUCCESS');
             $response['status'] ='200_SUCCESS' ;
-            $response['data'] = array("success_flag" => 1 , "message" => 'UNAUTHORIZED1' );
+            $response['data'] = array("success_flag" => 1 , "message" => 'UNAUTHORIZED' );
             echo json_encode($response) ;  
             exit();
              
@@ -35,7 +33,7 @@ error_reporting(E_ALL & ~E_WARNING);
             {
                 header('HTTP/1.1 200 SUCCESS');
                 $response['status'] ='200_SUCCESS' ;
-                $response['data'] = array("success_flag" => 1 , "message" => 'UNAUTHORIZED2' );
+                $response['data'] = array("success_flag" => 1 , "message" => 'UNAUTHORIZED' );
                 echo json_encode($response) ;  
                 exit();  
             }

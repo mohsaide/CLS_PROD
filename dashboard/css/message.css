@@ -36,12 +36,12 @@
 }
 
 .people-list .chat-list li:hover {
-    background: #efefef;
+    background: white;
     cursor: pointer
 }
 
 .people-list .chat-list li.active {
-    background: #efefef
+    background: white;
 }
 
 .people-list .chat-list li .name {
@@ -159,12 +159,12 @@
 }
 
 .chat .chat-history .other-message {
-    background: #e8f1f3;
+    background: #FFFFFF;
     text-align: right
 }
 
 .chat .chat-history .other-message:after {
-    border-bottom-color: #e8f1f3;
+    border-bottom-color: #FFFFFF;
     left: 93%
 }
 
@@ -249,4 +249,15 @@
         height: calc(100vh - 350px);
         overflow-x: auto
     }
+}
+
+
+::-webkit-scrollbar {
+    display: none !important;
+}
+
+
+.card , .friend_img
+{
+    border: solid 2px #19756D !important ;
 }
