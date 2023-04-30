@@ -3,6 +3,22 @@ include 'page_start.php' ;
 ?>
 
 <?php 
+
+                                    if (!isset($_GET['UserId']))
+                                    { 
+                                        
+                                       ?>
+
+<script>
+  window.location.href = 'not_found.php';
+</script>
+
+                                       <?php
+                                       exit();
+
+                                    }
+
+
                                     try {
                                     include '../assets/php/connection.php';
                                     $query= "select
@@ -26,13 +42,22 @@ include 'page_start.php' ;
                                     left join country on country_id = country.id
                                     left join university_member on university_member.user_id = user.id and university_member.status ='ACTIVE' 
                                     left join university on university_id = university.id
-                                    where user.id = '".$_SESSION['UserId']."' ;" ;
+                                    where user.id = '".$_GET['UserId']."' ;" ;
                                     $result = mysqli_query($conn, $query);
                                     $data = mysqli_fetch_assoc($result);
                                     } catch (\Throwable $th) {
 
                                        exit();
                                     }
+                                    $enable_flag = $hidden_flag ='' ;
+                                    if($_GET['UserId'] != $_SESSION['UserId'])
+                                    {
+                                      $enable_flag ='disabled';
+                                      $hidden_flag = 'hidden';
+
+                                    }
+
+
                                     ?>
 
 
@@ -81,7 +106,7 @@ include 'page_start.php' ;
                                     ?></span><span> </span>
 
                                  <div class="row mt-3">
-                                     <div class="col-md-6 mt-3"><label class="labels">Name</label><input required type="text" class="form-control" name='fname' value="<?php 
+                                     <div class="col-md-6 mt-3"><label class="labels">Name</label><input <?php echo $enable_flag ; ?> required type="text" class="form-control" name='fname' value="<?php 
                                     try {
                                     echo $data['first_name'];
                                     } catch (\Throwable $th) {
@@ -89,7 +114,7 @@ include 'page_start.php' ;
                                        echo 'Unknown';
                                     }
                                     ?>"></div>
-                                     <div class="col-md-6 mt-3"><label class="labels">Surname</label><input required type="text" class="form-control" name='lname' value="<?php 
+                                     <div class="col-md-6 mt-3"><label class="labels">Surname</label><input <?php echo $enable_flag ; ?> required type="text" class="form-control" name='lname' value="<?php 
                                     try {
                                     echo $data['last_name'];
                                     } catch (\Throwable $th) {
@@ -97,7 +122,7 @@ include 'page_start.php' ;
                                        echo 'User';
                                     }
                                     ?>" ></div>
-                                     <div class="col-md-12 mt-3"><label class="labels">Mobile Number</label><input required type="text" class="form-control" name='phone'  value="<?php 
+                                     <div class="col-md-12 mt-3"><label class="labels">Mobile Number</label><input <?php echo $enable_flag ; ?> required type="text" class="form-control" name='phone'  value="<?php 
                                     try {
                                     echo $data['phone'];
                                     } catch (\Throwable $th) {
@@ -105,7 +130,7 @@ include 'page_start.php' ;
                                        echo '000 000 0000';
                                     }
                                     ?>"></div>
-                                     <div class="col-md-12 mt-3"><label class="labels mt-2">Date of birth</label><input required type="date" class="form-control" name='dob'  value="<?php 
+                                     <div class="col-md-12 mt-3"><label class="labels mt-2">Date of birth</label><input <?php echo $enable_flag ; ?> required type="date" class="form-control" name='dob'  value="<?php 
                                     try {
                                     echo $data['dob'];
                                     } catch (\Throwable $th) {
@@ -115,7 +140,7 @@ include 'page_start.php' ;
                                     ?>"></div>
                                      <div class="col-md-12 mt-3">
                                      <label for="address">Country - City</label>
-                                         <select required class="form-control" id="address" name='address' >
+                                         <select <?php echo $enable_flag ; ?> required class="form-control" id="address" name='address' >
                                              <option value ='<?php try {
                                     echo $data['city_id'];
                                     } catch (\Throwable $th) {
@@ -134,7 +159,7 @@ include 'page_start.php' ;
                                  </div>
                                  
 
-                                 <div class="mt-4 text-center"><button class="btn btn-primary profile-button" type="button" onclick="save_profile(event)">
+                                 <div class="mt-4 text-center"><button <?php echo $hidden_flag ; ?> class="btn btn-primary profile-button" type="button" onclick="save_profile(event)">
                                  Save Profile</button></div>
                         
                              </div>
